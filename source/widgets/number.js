@@ -5,7 +5,7 @@ regexp:true, undef:true, trailing:true, white:true */
 (function () {
 
   /**
-    An input field built for dealing with numbers
+    An input field built for dealing with numbers.
 
     @class
     @name XV.Number
@@ -18,14 +18,23 @@ regexp:true, undef:true, trailing:true, white:true */
     published: {
       scale: 0
     },
+    /**
+    @todo Document setValue method.
+    */
     setValue: function (value, options) {
       value = _.isNumber(value) ? XT.math.round(value, this.getScale()) : null;
       XV.Input.prototype.setValue.call(this, value, options);
     },
+    /**
+     Determines whether the user input is numeric.
+     */
     validate: function (value) {
       value = Number(value);
       return isNaN(value) ? false : value;
     },
+    /**
+     @todo Document the valueChanged method.
+     */
     valueChanged: function (value) {
       value = value || value === 0 ? Globalize.format(value, "n" + this.getScale()) : "";
       return XV.Input.prototype.valueChanged.call(this, value);
@@ -33,7 +42,7 @@ regexp:true, undef:true, trailing:true, white:true */
   });
 
   /**
-    An input with styled label and decorator built for dealing with numbers
+    An input with styled label and decorator built for dealing with numbers.
 
     @class
     @name XV.NumberWidget
@@ -57,11 +66,17 @@ regexp:true, undef:true, trailing:true, white:true */
         ]}
       ]}
     ],
+    /**
+     @todo Document the create method.
+     */
     create: function () {
       this.inherited(arguments);
       this.labelChanged();
       this.showLabelChanged();
     },
+    /**
+     @todo Revisit or remove after enyo fix to ENYO-1104.
+     */
     keyDown: function (inSender, inEvent) {
       // XXX hack here (and in other places that reference issue 18397)
       // can be removed once enyo fixes ENYO-1104
@@ -70,10 +85,16 @@ regexp:true, undef:true, trailing:true, white:true */
       inEvent.originator.addRemoveClass("text-shadow-0", shadowNone);
       // end hack
     },
+    /**
+     @todo Document the labelChanged method.
+     */
     labelChanged: function () {
       var label = (this.getLabel() || ("_" + this.attr + "").loc()) + ":";
       this.$.label.setContent(label);
     },
+    /**
+     @todo Document the showLabelChanged method.
+     */
     showLabelChanged: function () {
       if (this.getShowLabel()) {
         this.$.label.show();

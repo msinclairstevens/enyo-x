@@ -19,10 +19,16 @@ trailing:true white:true*/
     handlers: {
       onValueChange: "controlValueChanged"
     },
+    /**
+    @todo Document the destroy method.
+    */
     destroy: function () {
       this.value = null;
       this.inherited(arguments);
     },
+    /**
+    @todo Document the setValue method.
+    */
     setValue: function (value) {
       this.value = value;
       this.attributesChanged(value);
@@ -59,13 +65,22 @@ trailing:true white:true*/
       onTransitionFinish: "transitionFinished",
       onValueChange: "controlValueChanged"
     },
+    /**
+    @todo Document the attrChanged method.
+    */
     attrChanged: function () {
       this.$.list.setAttr(this.attr);
     },
+    /**
+    @todo Document the controlValueChanged method.
+    */
     controlValueChanged: function () {
       this.$.list.refresh();
       return true;
     },
+    /**
+    @todo Document the create method.
+    */
     create: function () {
       this.inherited(arguments);
       var editor = this.getEditor(),
@@ -115,6 +130,9 @@ trailing:true white:true*/
       });
 
     },
+    /**
+    @todo Document the deleteItem method.
+    */
     deleteItem: function () {
       var index = this.$.list.getFirstSelected(),
         model = index ? this.$.list.getModel(index) : null;
@@ -122,11 +140,17 @@ trailing:true white:true*/
       model.destroy();
       this.$.list.lengthChanged();
     },
+    /**
+    @todo Document the doneItem method.
+    */
     doneItem: function () {
       var index = this.$.list.getFirstSelected(),
         selection = this.$.list.getSelection();
       selection.deselect(index);
     },
+    /**
+    @todo Document the newItem method.
+    */
     newItem: function () {
       var collection = this.$.list.getValue(),
         Klass = collection.model,
@@ -135,14 +159,24 @@ trailing:true white:true*/
       collection.add(model);
       this.$.list.select(collection.length - 1);
     },
+    /**
+    @todo Document the nextItem method.
+    */
     nextItem: function () {
       var index = this.$.list.getFirstSelected() - 0;
       this.$.list.select(index + 1);
     },
+    /**
+    @todo Document the prevItem method.
+    */
     prevItem: function () {
       var index = this.$.list.getFirstSelected() - 0;
       this.$.list.select(index - 1);
     },
+    /**
+    @todo Document the selectionChanged method.
+    mss: Detects whether the user has selected a different item...and then what?
+    */
     selectionChanged: function (inSender, inEvent) {
       var index = this.$.list.getFirstSelected(),
         model = index ? this.$.list.getModel(index) : null,
@@ -169,6 +203,9 @@ trailing:true white:true*/
         this.$.nextButton.setDisabled(true);
       }
     },
+    /**
+    @todo Document the transitionFinished method.
+    */
     transitionFinished: function (inSender, inEvent) {
       if (inEvent.originator.name === 'panels') {
         if (this.$.panels.getIndex() === 1) {
@@ -177,6 +214,9 @@ trailing:true white:true*/
         return true;
       }
     },
+    /**
+    @todo Doucment the valueChanged method.
+    */
     valueChanged: function () {
       var value = this.getValue();
       this.$.list.setValue(value);

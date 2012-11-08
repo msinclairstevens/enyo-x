@@ -60,11 +60,17 @@ white:true*/
         ]}
       ]}
     ],
+    /**
+     @todo Document itemSelected method.
+     */
     itemSelected: function (inSender, inEvent) {
       var value = this.$.picker.getSelected().content;
       this.setValue(value);
       return true;
     },
+    /**
+     @todo Document setCollection method.
+     */
     setCollection: function (collection) {
       var model,
         value,
@@ -83,6 +89,9 @@ white:true*/
       }
       this.render();
     },
+    /**
+     @todo Document setValue method.
+     */
     setValue: function (value, options) {
       options = options || {};
       var oldValue = this.getValue(),
@@ -105,6 +114,9 @@ white:true*/
       }
       return value;
     },
+    /**
+     @todo Document sort method.
+     */
     sort: function (a, b) {
       var aord = a.get('order'),
         bord = b.get('order'),
@@ -144,6 +156,9 @@ white:true*/
       {kind: "XV.OptionsPicker", attr: "value", showLabel: false,
         showing: false}
     ],
+    /**
+     @todo Document controlValueChanged method.
+     */
     controlValueChanged: function (inSender, inEvent) {
       var attr = inSender.getAttr(),
         value = inSender.getValue(),
@@ -175,9 +190,15 @@ white:true*/
       }
       return true;
     },
+    /**
+     @todo Document getCharacteristicPicker method.
+     */
     getCharacteristicPicker: function () {
       return this.$.characteristicPicker;
     },
+    /**
+     @todo Document valueChanged method.
+     */
     valueChanged: function () {
       var model = this.getValue(),
         characteristic = model.get('characteristic'),
@@ -240,6 +261,9 @@ white:true*/
           content: "_new".loc()}
       ]}
     ],
+    /**
+     @todo Document create method.
+     */
     create: function () {
       this.inherited(arguments);
       // Hide this if there aren't any characteristics set up
@@ -249,14 +273,23 @@ white:true*/
         });
       if (!models.length) { this.hide(); }
     },
+    /**
+     @todo Document lengthChanged method.
+     */
     lengthChanged: function () {
       this.$.repeater.setCount(this.readyModels().length);
     },
+    /**
+     @todo Document newItem method.
+     */
     newItem: function () {
       var Klass = XT.getObjectByName(this.getModel()),
         model = new Klass(null, { isNew: true });
       this.value.add(model);
     },
+    /**
+     @todo Document readyModels method.
+     */
     readyModels: function () {
       return _.filter(this.value.models, function (model) {
         var status = model.getStatus(),
@@ -267,6 +300,9 @@ white:true*/
                 status === K.READY_NEW);
       });
     },
+    /**
+     @todo Document setupItem method.
+     */
     setupItem: function (inSender, inEvent) {
       var item = inEvent.item.$.characteristicItem,
         model = this.readyModels()[inEvent.index],
@@ -285,6 +321,9 @@ white:true*/
       }
       return true;
     },
+    /**
+     @todo Document sort method.
+     */
     sort: function (a, b) {
       var astatus = a.getStatus(),
         bstatus = b.getStatus(),
@@ -304,6 +343,9 @@ white:true*/
       }
       return astatus < bstatus ? -1 : 1;
     },
+    /**
+     @todo Document setValue method.
+     */
     setValue: function (value) {
       if (this.value) {
         this.value.off('add', this.lengthChanged, this);

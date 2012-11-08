@@ -23,6 +23,9 @@ regexp:true, undef:true, trailing:true, white:true */
       {name: "input", kind: "onyx.TextArea", classes: "xv-textarea-input",
         onchange: "inputChanged", onkeydown: "keyDown"}
     ],
+    /**
+     @todo Revisit or remove after ENYO-1104 is resolved.
+     */
     keyDown: function (inSender, inEvent) {
       // XXX hack here (and in other places that reference issue 18397)
       // can be removed once enyo fixes ENYO-1104
@@ -31,6 +34,9 @@ regexp:true, undef:true, trailing:true, white:true */
       inEvent.originator.addRemoveClass("text-shadow-0", shadowNone);
       // end hack
     },
+    /**
+     @todo Document the placeholderChanged method.
+     */
     placeholderChanged: function () {
       var placeholder = this.getPlaceholder();
       this.$.input.setPlaceholder(placeholder);

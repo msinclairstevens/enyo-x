@@ -33,6 +33,9 @@ white:true*/
       {name: "input", classes: "xv-parameter-item-input"}
     ],
     defaultKind: "XV.InputWidget",
+    /**
+     @todo Document the create method.
+     */
     create: function () {
       this.inherited(arguments);
       this.labelChanged();
@@ -40,9 +43,15 @@ white:true*/
         this.setOperator("MATCHES");
       }
     },
+    /**
+     @todo Document the labelChanged method.
+     */
     labelChanged: function () {
       this.$.input.setLabel(this.label);
     },
+    /**
+     @todo Document the getParameter method.
+     */
     getParameter: function () {
       var param,
         attr = this.getAttr(),
@@ -57,6 +66,9 @@ white:true*/
       }
       return param;
     },
+    /**
+     @todo Document the getValue method.
+     */
     getValue: function () {
       var value = this.$.input.getValue();
       if (value && this.$.input.valueAttribute) {
@@ -64,11 +76,17 @@ white:true*/
       }
       return value;
     },
+    /**
+     @todo Document the parameterChanged method.
+     */
     parameterChanged: function () {
       var inEvent = { value: this.getValue, originator: this };
       this.doParameterChange(inEvent);
       return true; // stop right here
     },
+    /**
+     @todo Document the setValue method.
+     */
     setValue: function (value, options) {
       this.$.input.setValue(value, options);
     }
@@ -97,6 +115,9 @@ white:true*/
     },
     defaultKind: "XV.ParameterItem",
     isAllSetUp: false,
+    /**
+     @todo Document the create method.
+     */
     create: function () {
       var role = this.getCharacteristicsRole(),
         K = XM.Characteristic,
@@ -193,6 +214,9 @@ white:true*/
         }
       }
     },
+    /**
+     @todo Document the getParameters method.
+     */
     getParameters: function () {
       var i,
         param,
@@ -206,8 +230,8 @@ white:true*/
       return params;
     },
     /**
-      @param {Object} options
-    */
+     @param {Object} options
+     */
     getSelectedValues: function (options) {
       options = options || {};
       var values = {},
@@ -236,7 +260,7 @@ white:true*/
       return values;
     },
     /**
-      Remember the state of this parameter widget
+     Remember the state of this parameter widget.
      */
     memoize: function (inSender, inEvent) {
       if (!this.getMemoizeEnabled()) { return; }
@@ -254,6 +278,9 @@ white:true*/
       cookieName = 'advancedSearchCache_' + dbName + '_' + this.name;
       enyo.setCookie(cookieName, JSON.stringify(values));
     },
+    /**
+     @todo Document the populateFromCookie method.
+     */
     populateFromCookie: function () {
       if (!this.getMemoizeEnabled()) { return; }
       var dbName = XT.session.details.organization,
@@ -278,6 +305,9 @@ white:true*/
         }
       }
     },
+    /**
+     @todo Document the setParameterItemValues method.
+     */
     setParameterItemValues: function (items) {
       var that = this;
       _.each(items, function (item) {

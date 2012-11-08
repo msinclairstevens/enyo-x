@@ -9,7 +9,6 @@ trailing:true white:true*/
   var FETCH_TRIGGER = 5;
 
   /**
-
     List to attach to workspaces to present related data.
 
     @class
@@ -35,7 +34,7 @@ trailing:true white:true*/
       onSetupItem: "setupItem"
     },
     /**
-      Clear all bindings
+      Clear all bindings.
      */
     destroy: function () {
       var value = this.getValue(),
@@ -55,6 +54,9 @@ trailing:true white:true*/
       }
       this.inherited(arguments);
     },
+    /**
+     @todo Document the getFirstSelected method.
+     */
     getFirstSelected: function () {
       var selected = this.getSelection().selected,
         prop;
@@ -64,14 +66,23 @@ trailing:true white:true*/
         }
       }
     },
+    /**
+     @todo Document the getModel method.
+     */
     getModel: function (index) {
       return this.readyModels()[index];
     },
+    /**
+     @todo Document the getParent method.
+     */
     getParent: function () {
       var key = this.getParentKey(),
         value = this.getValue();
       return key && value ? value[key] : null;
     },
+    /**
+     @todo Document the fetchRelated method.
+     */
     fetchRelated: function (max) {
       var parent = this.getParent(),
         attr = this.getAttr(),
@@ -80,6 +91,9 @@ trailing:true white:true*/
         parent.fetchRelated(attr, options);
       }
     },
+    /**
+     @todo Document the hasMore method.
+     */
     hasMore: function () {
       var parent = this.getParent(),
         value = this.getValue(),
@@ -89,6 +103,9 @@ trailing:true white:true*/
         keyContents = relation && relation.keyContents ? relation.keyContents : [];
       return count < keyContents.length;
     },
+    /**
+     @todo Document the lengthChanged method.
+     */
     lengthChanged: function () {
       var count = this.readyModels().length,
         value = this.getValue(),
@@ -105,6 +122,9 @@ trailing:true white:true*/
       this.setCount(count);
       this.refresh();
     },
+    /**
+     @todo Document the modelAdded method.
+     */
     modelAdded: function (model) {
       var status = model.getStatus(),
         K = XM.Model;
@@ -115,6 +135,9 @@ trailing:true white:true*/
         model.on('statusChange', this.statusChanged, this);
       }
     },
+    /**
+     @todo Document the orderByChanged method.
+     */
     orderByChanged: function () {
       var orderBy = this.getOrderBy() || [],
         value = this.getValue();
@@ -138,9 +161,15 @@ trailing:true white:true*/
         };
       }
     },
+    /**
+     @todo Document the parentStatusChanged method.
+     */
     parentStatusChanged: function (model) {
       this.doParentStatusChange(model);
     },
+    /**
+     @todo Document the readyModels method.
+     */
     readyModels: function () {
       return _.filter(this.value.models, function (model) {
         var status = model.getStatus(),
@@ -151,6 +180,9 @@ trailing:true white:true*/
                 status === K.READY_NEW);
       });
     },
+    /**
+     @todo Document the scroll method. How does it differ from the implementation for XV.List?
+     */
     scroll: function (inSender, inEvent) {
       var r = this.inherited(arguments),
         bounds = this.getScrollBounds(),
@@ -169,6 +201,9 @@ trailing:true white:true*/
       }
       return r;
     },
+    /**
+     @todo Document the setupItem method.
+     */
     setupItem: function (inSender, inEvent) {
       var index = inEvent.index,
         isSelected = inEvent.originator.isSelected(index),
@@ -212,12 +247,18 @@ trailing:true white:true*/
       this.$.listItem.addRemoveClass("item-selected", isSelected);
       return true;
     },
+    /**
+     @todo Document the statusChanged method.
+     */
     statusChanged: function (model) {
       if (model.getStatus() === XM.Model.READY_CLEAN) {
         model.off('statusChange', this.statusChanged, this);
         this.lengthChanged();
       }
     },
+    /**
+     @todo Document the valueChanged method.
+     */
     valueChanged: function () {
       var value = this.getValue();
       if (value) {

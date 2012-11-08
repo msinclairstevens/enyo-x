@@ -23,15 +23,24 @@ regexp:true, undef:true, trailing:true, white:true */
     handlers: {
       onchange: "changed"
     },
+    /**
+    @todo Document clear method.
+    */
     clear: function (options) {
       this.setValue(false, options);
     },
+    /**
+    @todo Document setValue method.
+    */
     setValue: function (value, options) {
       options = options || {};
       this._silent = options.silent;
       this.inherited(arguments);
       this._silent = false;
     },
+    /**
+    @todo Document changed method.
+    */
     changed: function (inSender, inEvent) {
       if (!this._silent) {
         inEvent.value = this.getValue();
@@ -63,21 +72,36 @@ regexp:true, undef:true, trailing:true, white:true */
         ]}
       ]}
     ],
+    /**
+    @todo Document Clear method.
+    */
     clear: function (options) {
       this.setValue(false, options);
     },
+    /**
+    @todo Document create method.
+    */
     create: function () {
       this.inherited(arguments);
       this.labelChanged();
     },
+    /**
+    @todo Document inputChanged method.
+    */
     inputChanged: function (inSender, inEvent) {
       var input = this.$.input.getValue();
       this.setValue(input);
     },
+    /**
+    @todo Document labelChanged method.
+    */
     labelChanged: function () {
       var label = (this.getLabel() || ("_" + this.attr || "").loc()) + ":";
       this.$.label.setContent(label);
     },
+    /**
+    @todo Document valueChanged method.
+    */
     valueChanged: function (value) {
       this.$.input.setValue(value);
       return value;

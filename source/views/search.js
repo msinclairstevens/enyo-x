@@ -17,15 +17,20 @@ trailing:true white:true*/
     name: "XV.SearchContainer",
     kind: "Panels",
     classes: "app enyo-unselectable",
+    /**
+     * Published fields
+     * @type {Object}
+     * @property {} callback
+     *   Function to call when selection is made that passes back the selected model.
+     * @property {} conditions
+     *   Filter parameters that are not editable by the user.
+     * @property {} defaultParameterItemValues
+     *   Filter parameters applied to the parameter widget and that are editable by the user.
+     * @todo What is the type for each of these properties?
+     */  
     published: {
       callback: null,
-      /**
-        Filter parameters not editable by the user
-      */
       conditions: null,
-      /**
-        Filter parameters applied to parameter widget and editable by the user.
-      */
       defaultParameterItemValues: null
     },
     events: {
@@ -60,9 +65,15 @@ trailing:true white:true*/
       ]}
     ],
     init: false,
+    /**
+    @todo Document the close method.
+    */
     close: function (options) {
       this.doPrevious();
     },
+    /**
+    @todo Document the itemTap method.
+    */
     itemTap: function (inSender, inEvent) {
       var list = inEvent.list,
         value = list ? list.getModel(inEvent.index) : null;
@@ -72,6 +83,9 @@ trailing:true white:true*/
         this.close();
       }
     },
+    /**
+    @todo Document the fetch method.
+    */
     fetch: function (options) {
       if (!this.init) { return; }
       options = options ? _.clone(options) : {};
@@ -115,6 +129,9 @@ trailing:true white:true*/
       list.setQuery(query);
       list.fetch(options);
     },
+    /**
+    @todo Document the defaultParameterItemValuesChanged method
+    */
     defaultParameterItemValuesChanged: function () {
       var parameterWidget = this.$.parameterWidget,
         items = this.getDefaultParameterItemValues() || [];
@@ -122,6 +139,9 @@ trailing:true white:true*/
         parameterWidget.setParameterItemValues(items);
       }
     },
+    /**
+    @todo Document the requery method
+    */
     requery: function (inSender, inEvent) {
       this.fetch();
       return true;
