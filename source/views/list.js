@@ -9,8 +9,6 @@ trailing:true white:true*/
   var FETCH_TRIGGER = 100;
 
   /**
-  
-  
     @class
     @name XV.ListItem
     @see XV.List
@@ -25,8 +23,6 @@ trailing:true white:true*/
   });
 
   /**
-
-
     @class
     @name XV.ListColumn
     @see XV.List
@@ -37,8 +33,6 @@ trailing:true white:true*/
   });
 
   /**
-
-
     @class
     @name XV.ListAttr
     @see XV.List
@@ -52,7 +46,7 @@ trailing:true white:true*/
   });
 
   /**
-    Displays a scrolling list of rows. 
+    @class Displays a scrolling list of rows. 
     Handles lazy loading. Passes in the first 50 items, and as one scrolls, passes more.
     Note: enyo.list includes a scroller; therefore, XV.List should not be placed inside a scroller.
     @class

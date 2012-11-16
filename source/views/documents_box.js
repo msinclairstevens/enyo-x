@@ -6,8 +6,6 @@ trailing:true white:true*/
 (function () {
 
   /**
-
-
     @class
     @name XV.DocumentListRelations
    */
@@ -91,14 +89,6 @@ trailing:true white:true*/
       case 'D':
         purpose = "_duplicate".loc();
         break;
-      case 'P':
-        purpose = "_product".loc();
-        break;
-      case 'E':
-        purpose = "_engineering".loc();
-        break;
-      default:
-        purpose = "_miscellaneous".loc();
       }
       return purpose;
     },
@@ -139,10 +129,9 @@ trailing:true white:true*/
   });
 
   /**
-	mss: Creates a documents box.
     @class
     @name XV.DocumentsBox
-  */
+   */
   enyo.kind(/** @lends XV.DocumentsBox# */{
     name: "XV.DocumentsBox",
     kind: "XV.ListRelationsBox",

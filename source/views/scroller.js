@@ -6,10 +6,8 @@ white:true*/
 (function () {
 
   /**
-  	Provides a viewport in which the user may scroll content using touch or mouse actions.
+  	@class Provides a viewport in which the user may scroll content using touch or mouse actions.
     Styled with our css.
-
-    @class
     @name XV.Scroller
    */
   enyo.kind(/** @lends XV.Scroller# */{
