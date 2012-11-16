@@ -5,7 +5,6 @@ regexp:true, undef:true, trailing:true, white:true */
 (function () {
 
   /**
-
     @class
     @name XV.Date
     @extends XV.Input
@@ -131,7 +130,6 @@ regexp:true, undef:true, trailing:true, white:true */
   });
 
   /**
-
     @class
     @name XV.DateWidget
     @extends XV.Date

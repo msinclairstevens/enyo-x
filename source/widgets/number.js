@@ -5,9 +5,7 @@ regexp:true, undef:true, trailing:true, white:true */
 (function () {
 
   /**
-    An input field built for dealing with numbers.
-
-    @class
+    @class An input field built for dealing with numbers.
     @name XV.Number
     @extends XV.Input
     @see XV.NumberWidget
@@ -26,10 +24,15 @@ regexp:true, undef:true, trailing:true, white:true */
       XV.Input.prototype.setValue.call(this, value, options);
     },
     /**
-     Determines whether the user input is numeric.
+      @class Determines whether the user input is numeric.
+      Validates value, whether set programatically or via user input. Gracefully handles
+      commas, periods, etc per the set culture using Globalize.
+
+      @param {String} Number (string) to be validated.
+      @return The value if it is valid, otherwise false
      */
     validate: function (value) {
-      value = Number(value);
+      value = Globalize.parseFloat(value);
       return isNaN(value) ? false : value;
     },
     /**
@@ -42,9 +45,7 @@ regexp:true, undef:true, trailing:true, white:true */
   });
 
   /**
-    An input with styled label and decorator built for dealing with numbers.
-
-    @class
+    @class An input with styled label and decorator built for dealing with numbers.
     @name XV.NumberWidget
     @extends XV.Number
    */

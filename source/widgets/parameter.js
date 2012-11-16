@@ -6,9 +6,7 @@ white:true*/
 (function () {
 
   /**
-    A particular widget filter contained in a {@link XV.ParameterWidget}.
-
-    @class
+    @class A particular widget filter contained in a {@link XV.ParameterWidget}.
     @name XV.ParameterItem
     @see XV.ParameterWidget
    */
@@ -94,9 +92,7 @@ white:true*/
   });
 
   /**
-    The panel of the advanced search feature.
-
-    @class
+    @class The panel of the advanced search feature.
     @name XV.ParameterWidget
     @extends enyo.FittableRows
     @extends XV.ExtensionsMixin
@@ -193,7 +189,7 @@ white:true*/
               name: char.get('name') + "FromCharacteristic",
               label: "_from".loc(),
               filterLabel: char.get('name') + " " + "_from".loc(),
-              operator: "<=",
+              operator: ">=",
               attr:  char.get('name'),
               isCharacteristic: true,
               defaultKind: "XV.DateWidget"
@@ -204,7 +200,7 @@ white:true*/
               name: char.get('name') + "ToCharacteristic",
               label: "_to".loc(),
               filterLabel: char.get('name') + " " + "_to".loc(),
-              operator: ">=",
+              operator: "<=",
               attr:  char.get('name'),
               isCharacteristic: true,
               defaultKind: "XV.DateWidget"
@@ -230,8 +226,13 @@ white:true*/
       return params;
     },
     /**
-     @param {Object} options
-     */
+      Retrieves parameter values. By default returns values as human readable
+      strings. Boolean options are:
+        * name - If true returns the parameter item control name, otherwise returns the label.
+        * value - If true returns the control value, other wise returns a human readable string.
+        * deltaDate - If true returns as string for the date difference for date widgets. (i.e. "+5").
+      @param {Object} options
+    */
     getSelectedValues: function (options) {
       options = options || {};
       var values = {},
@@ -239,20 +240,33 @@ white:true*/
         component,
         value,
         label,
-        control;
+        control,
+        date,
+        today,
+        days;
 
       for (componentName in this.$) {
         if (this.$[componentName] instanceof XV.ParameterItem &&
             this.$.hasOwnProperty(componentName)) {
           component = this.$[componentName];
           value = component.getValue();
-          label = options.name ? component.getName() : component.getFilterLabel() || component.getLabel();
+          label = options.name ?
+            component.getName() :
+            component.getFilterLabel() || component.getLabel();
           control = component.$.input;
           if (value) {
-            if (options.value) {
+            if (options.deltaDate &&
+                component.$.input.kind === 'XV.DateWidget') {
+              today = XT.date.today();
+              date = XT.date.applyTimezoneOffset(control.getValue(), true);
+              days = XT.date.daysBetween(date, today);
+              days = days < 0 ? "" + days : "+" + days;
+              values[label] = days;
+            } else if (options.value) {
               values[label] = value instanceof XM.Model ? value.id : value;
             } else {
-              values[label] = control.getValueToString ? control.getValueToString() : value;
+              values[label] = control.getValueToString ?
+                control.getValueToString() : value;
             }
           }
         }
@@ -273,7 +287,11 @@ white:true*/
         return;
       }
 
-      values = this.getSelectedValues({name: true, value: true});
+      values = this.getSelectedValues({
+        name: true,
+        value: true,
+        deltaDate: true
+      });
       dbName = XT.session.details.organization;
       cookieName = 'advancedSearchCache_' + dbName + '_' + this.name;
       enyo.setCookie(cookieName, JSON.stringify(values));

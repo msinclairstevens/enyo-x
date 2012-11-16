@@ -196,13 +196,7 @@ white:true*/
   });
 
   /**
-<<<<<<< .merge_file_bGaqMN
-    A comment box contains and manages multiple comments, represented as CommentBoxItems.
-
-    @class
-=======
     @class The comment box contains and manages multiple comments, represented as CommentBoxItems
->>>>>>> .merge_file_HrEmHA
     @name XV.CommentBox
     @see XV.CommentBoxItem
    */
